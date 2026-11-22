@@ -160,7 +160,7 @@ ${ORDER.map(k => `          <li><a href="${href(k)}"${page === k ? ' aria-curren
         <a href="mailto:${L.email}">${L.email}</a>
       </div>
     </div>
-    <div class="footer-bottom">© 2026 Mocked Monkey, Alessandro Falchi · Bologna, Italy</div>
+    <div class="footer-bottom">© 2025 Mocked Monkey, Alessandro Falchi · Bologna, Italy</div>
   </div>
 </footer>
 <button class="to-top" type="button" aria-label="${T('Torna su', 'Back to top')}">&uarr;</button>
@@ -174,7 +174,7 @@ ${ORDER.map(k => `          <li><a href="${href(k)}"${page === k ? ' aria-curren
   <p class="pull-by">${T('Feedback da SONDA · Centro Musica Modena, 2026', 'Feedback from SONDA · Centro Musica Modena, 2026')}</p>
 </blockquote>`;
 
-  const yt = (id, title) => `<div class="yt" data-yt="${id}" data-title="${esc(title)}"><button type="button" aria-label="${T('Guarda il video', 'Play the video')}: ${esc(title)}"></button></div>`;
+  const yt = (id, title) => `<div class="yt"><iframe src="https://www.youtube-nocookie.com/embed/${id}?rel=0" title="${esc(title)}" loading="lazy" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`;
 
   // ------------------------------------------------------------ pages
   const pages = {};
@@ -185,7 +185,7 @@ ${ORDER.map(k => `          <li><a href="${href(k)}"${page === k ? ' aria-curren
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">${T('Bologna, Italia · One man band', 'Bologna, Italy · One man band')}</span>
-      <h1>${T('Una Wii diventa la cassa. Un kazoo diventa un synth.', 'A Wii becomes the kick drum. A kazoo becomes a synth.')}</h1>
+      <h1>${T('Quando si è troppo poveri per avere una band, una Wii diventa la cassa. Un kazoo diventa un synth.', 'When you\'re too poor to have a band, a Wii becomes the kick drum. A kazoo becomes a synth.')}</h1>
       <p class="lead">${T('Mocked Monkey è Alessandro Falchi. Costruisce gli strumenti che sul mercato non esistono, per trovare un suono che emozioni. Sul palco è da solo, ma sembra una band.', 'Mocked Monkey is Alessandro Falchi. He builds the instruments no shop sells, chasing a sound that actually moves you. He\'s alone on stage, but it sounds like a band.')}</p>
       <div class="actions">
         <a class="btn" href="${L.yt}" ${ext}>&#9654; ${T('Guarda il live', 'Watch him live')}</a>
@@ -212,25 +212,26 @@ ${zig('sage')}
 <section class="alt">
   <div class="wrap">
     <span class="eyebrow">${T('Gli artefatti', 'The artefacts')}</span>
-    <h2>${T('Tre porte, un solo mondo', 'Three doors, one world')}</h2>
+    <h2>${T('L\'Universo di Mocked Monkey', 'The Mocked Monkey universe')}</h2>
     <div class="grid-3" style="margin-top:34px">
       <article class="card">
+        <h3>${T('Indizio per il prossimo brano', 'A clue for the next song')}</h3>
         <span class="eyebrow">${T('Nuovo singolo · In lavorazione', 'New single · In the making')}</span>
-        <h3>${T('Il prossimo brano ha un indizio', 'The next song comes with a clue')}</h3>
-        <p class="dim">${T('Il video si gira a dicembre, con un oggetto che non è nato per fare video. Indovini quale?', 'The video is shot in December, with an object never meant to shoot video. Can you guess which one?')}</p>
+        <div class="media"><img src="${up}assets/images/work-in-progress.png" alt="${T('Cono stradale in pixel art con la scritta Work in progress', 'Pixel-art traffic cone with the words Work in progress')}" loading="lazy"></div>
+        <p class="dim">${T('Il video si gira a dicembre, con un oggetto che non è nato per fare video. Secondo te qual è?', 'The video is shot in December, with an object never meant to shoot video. Which one do you think it is?')}</p>
         <div class="actions"><a class="btn" href="${L.ig}" ${ext}>${T('Segui il diario', 'Follow the diary')} &rarr;</a></div>
       </article>
       <article class="card">
-        <img src="${up}assets/images/marasma-cover.jpg" alt="${T('Copertina di Marasma, concept album di Mocked Monkey', 'Marasma album cover, the Mocked Monkey concept album')}" loading="lazy" style="aspect-ratio:1/1">
-        <span class="eyebrow">${T('Concept album, 2025', 'Concept album, 2025')}</span>
         <h3>Marasma</h3>
+        <span class="eyebrow">${T('Concept album, 2025', 'Concept album, 2025')}</span>
+        <div class="media"><img src="${up}assets/images/marasma-cover.jpg" alt="${T('Copertina di Marasma, concept album di Mocked Monkey', 'Marasma album cover, the Mocked Monkey concept album')}" loading="lazy"></div>
         <p class="dim">${T('Un concept album sulla fuga, sul rumore e sull\'ascolto. Di sé e degli altri.', 'A concept album about escape, noise and listening. To yourself and to others.')}</p>
         <div class="actions"><a class="btn" href="${hrefTo('music', '#marasma')}">${T('Ascolta', 'Listen')} &rarr;</a></div>
       </article>
       <article class="card game">
-        <img class="thumb" src="${up}assets/images/immovable-game-preview.gif" alt="${T('Immovable, il gioco: anteprima di una partita', 'Immovable, the game: gameplay preview')}" loading="lazy">
-        <span class="eyebrow">${T('Il gioco · Gratis, nel browser', 'The game · Free, in your browser')}</span>
         <h3>Immovable: the game</h3>
+        <span class="eyebrow">${T('Il gioco · Gratis, nel browser', 'The game · Free, in your browser')}</span>
+        <div class="media"><img class="contain" src="${up}assets/images/immovable-game-preview.gif" alt="${T('Immovable, il gioco: anteprima di una partita', 'Immovable, the game: gameplay preview')}" loading="lazy"></div>
         <p class="dim">${T('Suona Immovable a tempo, in stile Guitar Hero. Si impara in un minuto.', 'Play Immovable to the beat, Guitar Hero style. Takes a minute to learn.')}</p>
         <div class="actions"><a class="btn primary" href="${L.game}" ${ext}>&#9654; ${T('Gioca ora', 'Play now')}</a></div>
       </article>
@@ -243,7 +244,7 @@ ${zig('rust')}
 <section>
   <div class="wrap">
     <span class="eyebrow">${T('L\'officina', 'The workshop')}</span>
-    <h2>${T('Strumenti che non trovi in negozio', 'Instruments you can\'t buy')}</h2>
+    <h2>${T('Quando quello che cerchi non esiste', 'When what you\'re looking for doesn\'t exist')}</h2>
     <p class="lead">${T('Ogni oggetto è qui per un motivo: il suono che cercavo, in commercio, non c\'era. Così me lo sono costruito.', 'Every object is here for a reason: the sound I was looking for didn\'t exist in any shop. So I built it.')}</p>
     <div class="grid-4" style="margin-top:34px">
       <div class="card">${ph(archive(137), T('Wii Balance Board aperta, vista dall\'alto', 'Wii Balance Board opened up, seen from above'))}
@@ -291,7 +292,7 @@ ${zig('rust')}
     <div>
       <span class="eyebrow">Live</span>
       <h1>${T('Dalla strada al palco', 'From the street to the stage')}</h1>
-      <p class="lead">${T('Un uomo solo, mani e piedi al lavoro: chitarra e armonica in alto, il ritmo battuto sulla pedana in basso. Ogni live racconta una storia dall\'inizio alla fine, anche quando c\'è tempo solo per due brani. E tra un brano e l\'altro, qualcosa succede sempre.', 'One man, hands and feet all at work: guitar and harmonica up top, the beat stamped out on the board below. Every show tells a story from start to finish, even when there\'s only time for two songs. And between songs, something always happens.')}</p>
+      <p class="lead">${T('Un uomo solo: chitarra e kazoo in alto, il ritmo battuto sulla wii in basso. Ogni live racconta una storia dall\'inizio alla fine, anche quando c\'è tempo solo per due brani. E tra un brano e l\'altro, qualcosa succede sempre.', 'One man alone: guitar and kazoo up top, the beat stamped out on the Wii below. Every show tells a story from start to finish, even when there\'s only time for two songs. And between songs, something always happens.')}</p>
       <div class="actions">
         <a class="btn" href="#prossimi">${T('Prossimi appuntamenti', 'Coming up')} &darr;</a>
         <a class="btn" href="#storico">${T('Dove ha già suonato', 'Where he\'s played')} &darr;</a>
@@ -307,7 +308,7 @@ ${zig('rust')}
   <div class="wrap">
     <span class="eyebrow">${T('Prossimi appuntamenti', 'Coming up')}</span>
     <h2>${T('In calendario', 'On the calendar')}</h2>
-    <p class="lead">${T('Non solo concerti: anche i giorni in studio, i contest e le riprese. Il diario di quello che si muove.', 'Not just gigs: studio days, contests and video shoots too. A diary of everything that\'s moving.')}</p>
+    <p class="lead">${T('Non solo concerti', 'Not just gigs')}</p>
     <div class="filters" role="group" aria-label="${T('Filtra per tipo', 'Filter by type')}" style="margin-top:28px">
       <button type="button" data-filter="all" aria-pressed="true">${T('Tutto', 'All')}</button>
       <button type="button" data-filter="live" aria-pressed="false">Live</button>
@@ -336,9 +337,9 @@ ${zig('rust')}
     <span class="eyebrow">${T('Foto e video', 'Photos & video')}</span>
     <h2>${T('Strada e palco', 'Street and stage')}</h2>
     <div class="grid-3" style="margin-top:30px">
-      <img class="photo r43" src="${up}assets/images/gallery/01.jpg" alt="${T('Mocked Monkey suona per strada tra i passanti', 'Mocked Monkey busking among the passers-by')}" loading="lazy">
-      <img class="photo r43" src="${up}assets/images/press/press-01.jpg" alt="${T('Mocked Monkey dal vivo sotto una luce blu', 'Mocked Monkey live under a blue light')}" loading="lazy">
-      <img class="photo r43" src="${up}assets/images/press/press-03.jpg" alt="${T('Sul palco con chitarra e porta-armonica', 'On stage with guitar and harmonica holder')}" loading="lazy">
+      <a href="${up}assets/images/gallery/01.jpg" target="_blank" rel="noopener"><img class="photo r43" src="${up}assets/images/gallery/01.jpg" alt="${T('Mocked Monkey suona per strada tra i passanti', 'Mocked Monkey busking among the passers-by')}" loading="lazy"></a>
+      <a href="${up}assets/images/press/press-01.jpg" target="_blank" rel="noopener"><img class="photo r43" src="${up}assets/images/press/press-01.jpg" alt="${T('Mocked Monkey dal vivo sotto una luce blu', 'Mocked Monkey live under a blue light')}" loading="lazy"></a>
+      <a href="${up}assets/images/press/press-03.jpg" target="_blank" rel="noopener"><img class="photo r43" src="${up}assets/images/press/press-03.jpg" alt="${T('Sul palco con chitarra e porta-armonica', 'On stage with guitar and harmonica holder')}" loading="lazy"></a>
     </div>
     <div class="actions"><a class="btn" href="${L.yt}" ${ext}>${T('Tutti i video su YouTube', 'All videos on YouTube')} &rarr;</a></div>
   </div>
@@ -382,13 +383,13 @@ ${zig('rust')}
     <div>
       <span class="eyebrow">${T('Nuovo singolo · In lavorazione', 'New single · In the making')}</span>
       <h2>${T('Un vecchio oggetto sta per riaccendersi', 'An old object is about to switch back on')}</h2>
-      <p class="lead">${T('Nuovo brano, nuovo video. Girato con qualcosa che non era nato per fare video. Da dicembre il diario dallo studio e dal set, un indizio alla volta.', 'New song, new video. Shot with something that was never meant to shoot video. From December, a diary from the studio and the set, one clue at a time.')}</p>
+      <p class="lead">${T('Nuovo brano, nuovo video. Girato con qualcosa che non era nato per fare video.', 'New song, new video. Shot with something that was never meant to shoot video.')}</p>
       <div class="actions">
         <a class="btn" href="${L.ig}" ${ext}>${T('Segui il diario su Instagram', 'Follow the diary on Instagram')} &rarr;</a>
         <a class="btn" href="${L.spArtist}" ${ext}>${T('Segui su Spotify', 'Follow on Spotify')} &rarr;</a>
       </div>
     </div>
-    ${ph(TAG_SHOT, T('Segnaposto del singolo: sarà sostituito da copertina e videoclip all\'uscita', 'Single placeholder: replaced by cover art and video on release'))}
+    <img class="photo" style="aspect-ratio:1/1" src="${up}assets/images/work-in-progress.png" alt="${T('Cono stradale in pixel art con la scritta Work in progress', 'Pixel-art traffic cone with the words Work in progress')}" loading="lazy">
   </div>
 </section>
 
@@ -422,7 +423,7 @@ ${zig('rust')}
       <div>
         <span class="eyebrow">${T('Concept album, 2025', 'Concept album, 2025')}</span>
         <h2>Marasma</h2>
-        <p class="lead">${T('Un disco sulla mancanza, sulla fuga e sull\'ascolto: degli altri e di sé.', 'A record about absence, escape and listening: to others, and to yourself.')}</p>
+        <p class="dim">${T('Un disco sulla mancanza, sulla fuga e sull\'ascolto: degli altri e di sé.', 'A record about absence, escape and listening: to others, and to yourself.')}</p>
         <p class="dim">${T('Il protagonista scappa da tutti e da tutto, senza ascoltare nessuno, nemmeno le voci nella sua testa, che si fanno sempre più forti. La fuga lo porta vicino all\'autodistruzione. Solo alla fine capisce che scappare non è la soluzione e sceglie di ascoltarsi.', 'The protagonist runs from everyone and everything, listening to no one, not even the voices in his head, which grow louder as the story unfolds. The escape pushes him close to self-destruction. Only at the end does he understand that running was never the answer, and he chooses to listen to himself.')}</p>
         <p class="credits">${T('Scritto e pre-prodotto da Alessandro Falchi · Prodotto da Davide Fasulo · Testi rivisti da Robert Lincoln Hackett · Grafica di Alessandro Burelli · Uscito il 3 giugno 2025', 'Written and pre-produced by Alessandro Falchi · Produced by Davide Fasulo · Lyrics reviewed by Robert Lincoln Hackett · Artwork by Alessandro Burelli · Released 3 June 2025')}</p>
       </div>
@@ -463,8 +464,8 @@ ${zig('sage')}
     <span class="eyebrow">${T('Video', 'Video')}</span>
     <h2>${T('Guarda', 'Watch')}</h2>
     <div class="grid-2" style="margin-top:30px; align-items:start">
-      <div>${yt('X_9uNMjH3Tg', 'Split Live Session')}<p class="video-cap"><strong>Split Live Session</strong><span class="dim">${T('Live session registrata allo Split di Bologna.', 'Live session recorded at Split, Bologna.')}</span></p></div>
-      <div>${yt('XzyPm--jsms', 'Crystal Jail')}<p class="video-cap"><strong>Crystal Jail</strong><span class="dim">${T('Una sessione per il Centro Musica di Modena.', 'A session for Centro Musica Modena.')}</span></p></div>
+      <div>${yt('X_9uNMjH3Tg', 'Crystal Jail')}<p class="video-cap"><strong>Crystal Jail</strong><span class="dim">${T('Una sessione per il Centro Musica di Modena.', 'A session for Centro Musica Modena.')}</span></p></div>
+      <div>${yt('XzyPm--jsms', 'Split Live Session')}<p class="video-cap"><strong>Split Live Session</strong><span class="dim">${T('Live session registrata allo Split di Bologna.', 'Live session recorded at Split, Bologna.')}</span></p></div>
     </div>
     <div class="actions"><a class="btn" href="${L.yt}" ${ext}>${T('Tutti i video su YouTube', 'All videos on YouTube')} &rarr;</a></div>
   </div>
@@ -518,7 +519,7 @@ ${zig('sage')}
       <span class="eyebrow">${T('Chi c\'è dietro', 'Who\'s behind it')}</span>
       <h2>Alessandro Falchi</h2>
       <p>${T('Mocked Monkey è il progetto di Alessandro Falchi, cantautore nato a Foligno e cresciuto, musicalmente, tra le strade e i palchi di Bologna. Dopo anni di collaborazioni, studio e sperimentazione, nel 2025 pubblica Marasma, un concept album sulla fuga e sull\'ascolto.', 'Mocked Monkey is the project of Alessandro Falchi, a songwriter born in Foligno who grew up, musically, between the streets and stages of Bologna. After years of collaborations, study and experimentation, in 2025 he released Marasma, a concept album about escape and listening.')}</p>
-      <p>${T('Sul palco è da solo, con chitarra, voce, armonica e gli strumenti dell\'officina, qui sotto. Tutto il resto è ascolto: il suo, e quello di chi si ferma.', 'On stage he\'s alone, with guitar, voice, harmonica and the instruments from the workshop below. Everything else is listening: his own, and that of whoever stops.')}</p>
+      <p>${T('Sul palco è da solo, con chitarra, voce, kazoo e gli strumenti dell\'officina, qui sotto.', 'On stage he\'s alone, with guitar, voice, kazoo and the instruments from the workshop below.')}</p>
       <p>${T('Durante i live qualcosa si rompe quasi sempre: una corda, un cavo, un pezzo dell\'officina. Fa parte dello spettacolo. Le canzoni, invece, sono serie: parlano di fuga, di rumore e di quanto sia difficile ascoltarsi.', 'Something almost always breaks during a show: a string, a cable, a piece of the workshop. It\'s part of the act. The songs, on the other hand, are serious: they\'re about escape, noise, and how hard it is to listen to yourself.')}</p>
       <dl class="facts">
         <div><dt>${T('Da', 'From')}</dt><dd>Foligno &rarr; Bologna</dd></div>
@@ -538,7 +539,7 @@ ${zig('rust')}
     <div class="grid-2" style="margin-top:30px; align-items:start">
       <div>
         <img class="photo r43" src="${up}assets/images/gallery/01.jpg" alt="${T('Busking tra i passanti, sotto i portici di Bologna', 'Busking among the passers-by in Bologna')}" loading="lazy" style="margin-bottom:18px">
-        <p>${T('Il progetto nasce suonando per strada, sotto i portici di Bologna e lungo le coste della Normandia. È da quei pomeriggi, e da chi si fermava ad ascoltare, che nasce #listeningisloving.', 'The project was born busking, under the porticoes of Bologna and along the coast of Normandy. #listeningisloving was born on those afternoons, and from the people who stopped to listen.')}</p>
+        <p>${T('Il progetto nasce suonando per strada, tra i portici di Bologna, tra i paesini sperduti e in tutti i luoghi del mondo che sono stati casa per un po\'. È dagli scambi sinceri con le persone incontrate in strada che nasce #listeningisloving.', 'The project was born busking: under the porticoes of Bologna, in remote little villages and in every place in the world that has been home for a while. #listeningisloving was born from the sincere exchanges with the people met on the street.')}</p>
       </div>
       <div>
         <img class="photo r43" src="${up}assets/images/press/press-01.jpg" alt="${T('Live con luce blu', 'Live under a blue light')}" loading="lazy" style="margin-bottom:18px">
@@ -559,7 +560,7 @@ ${zig('sage')}
     <div class="grid-4" style="margin-top:34px">
       <div class="card">${ph(archive(137), T('Wii Balance Board aperta', 'Wii Balance Board opened up'))}
         <h3>${T('Era una pedana, oggi è la cassa', 'Was a balance board, now it\'s the kick drum')}</h3>
-        <p class="dim">${T('Nata per pesare e far ballare. Ora ci salgo sopra mentre suono e tiene il tempo con i piedi.', 'Made to weigh you and make you dance. Now I stand on it while I play, and it keeps time under my feet.')}</p></div>
+        <p class="dim">${T('Nata per fare sport e ballare. Ora ci salgo sopra mentre suono e tengo il tempo con i piedi.', 'Made for sport and dancing. Now I stand on it while I play, and I keep time with my feet.')}</p></div>
       <div class="card">${ph(TAG_SHOT, T('Kazoo-synth in primo piano', 'Kazoo-synth close-up'))}
         <h3>${T('Era un giocattolo, oggi è un synth', 'Was a toy, now it\'s a synth')}</h3>
         <p class="dim">${T('Il più umile degli strumenti, collegato all\'elettronica giusta, diventa una linea di synth.', 'The humblest of instruments, wired to the right electronics, becomes a synth line.')}</p></div>
@@ -606,7 +607,7 @@ ${zig('sage')}
         <a class="btn" href="#contatti">${T('Scrivi per booking', 'Booking enquiries')} &rarr;</a>
       </div>
       <ul class="chips" style="margin-top:28px">
-        <li><a href="#prove">${T('Le prove', 'Proof')}</a></li>
+        <li><a href="#prove">${T('Dal vivo', 'Live')}</a></li>
         <li><a href="#stampa">${T('Stampa', 'Press')}</a></li>
         <li><a href="#scheda-tecnica">${T('Scheda tecnica', 'Tech specs')}</a></li>
         <li><a href="#contatti">${T('Contatti', 'Contact')}</a></li>
@@ -645,7 +646,7 @@ ${zig('sage')}
 <section class="alt" id="prove">
   <div class="wrap grid-2" style="align-items:start">
     <div>
-      <span class="eyebrow">${T('Le prove', 'The proof')}</span>
+      <span class="eyebrow">${T('Dal vivo', 'Live')}</span>
       <h2>${T('Il live funziona', 'The live show works')}</h2>
       <ul class="past">
 ${T([['10.12.26', 'Echo Sound, semifinali', 'Casinalbo (MO)'], ['10.2026', 'Woofstock', 'Udine'], ['09.2026', 'Scena Futura Contest', ''], ['2026', 'Cinema Bar Open Mic', 'Los Angeles'], ['03.2026', 'Strabismi Festival', ''], ['03.2026', 'SONDA, selezione per incontri con produttori', 'Modena'], ['08.2025', 'Busking in Normandia', 'Étretat']],
@@ -684,7 +685,7 @@ ${zig('sage')}
 <section class="alt" id="scheda-tecnica">
   <div class="wrap">
     <span class="eyebrow">${T('Scheda tecnica', 'Tech specs')}</span>
-    <h2>${T('Poco palco, pochi problemi', 'Small stage, few problems')}</h2>
+    <h2>${T('Setup compatto, pochi problemi', 'Compact setup, few problems')}</h2>
     <div class="grid-3" style="margin-top:34px">
       <div class="spec"><div class="num">L / R</div><h3>${T('Due canali al fonico', 'Two channels to the desk')}</h3><p class="dim">${T('La pedaliera ha un mixer interno: tutto quello che suona arriva in sala su due soli canali, left e right.', 'The pedalboard has a built-in mixer: everything he plays reaches front of house on just two channels, left and right.')}</p></div>
       <div class="spec"><div class="num">1</div><h3>${T('Un musicista, poco spazio', 'One musician, small footprint')}</h3><p class="dim">${T('Suona seduto, con la Wii Balance Board ai piedi. Entra anche nei palchi più piccoli e nelle line-up con più artisti.', 'He plays seated, with the Wii Balance Board at his feet. Fits even the smallest stages and multi-artist line-ups.')}</p></div>
@@ -705,10 +706,10 @@ ${zig('rust')}
     <span class="eyebrow">${T('Foto stampa', 'Press photos')}</span>
     <h2>${T('In alta risoluzione', 'High resolution')}</h2>
     <div class="grid-4" style="margin-top:30px">
-      <img class="photo r34" src="${up}assets/images/press/press-03.jpg" alt="${T('Primo piano con porta-armonica', 'Close-up with the harmonica holder')}" loading="lazy">
-      <img class="photo r34" src="${up}assets/images/gallery/03.jpg" alt="${T('Live con luci verdi e viola', 'Live with green and purple lights')}" loading="lazy">
-      <img class="photo r34" src="${up}assets/images/press/press-01.jpg" alt="${T('Live con luce blu', 'Live under a blue light')}" loading="lazy">
-      <img class="photo r34" src="${up}assets/images/press/press-02.jpg" alt="${T('Busking tra i passanti', 'Busking among the passers-by')}" loading="lazy">
+      <a href="${up}assets/images/press/press-03.jpg" target="_blank" rel="noopener"><img class="photo r34" src="${up}assets/images/press/press-03.jpg" alt="${T('Primo piano con porta-armonica', 'Close-up with the harmonica holder')}" loading="lazy"></a>
+      <a href="${up}assets/images/gallery/03.jpg" target="_blank" rel="noopener"><img class="photo r34" src="${up}assets/images/gallery/03.jpg" alt="${T('Live con luci verdi e viola', 'Live with green and purple lights')}" loading="lazy"></a>
+      <a href="${up}assets/images/press/press-01.jpg" target="_blank" rel="noopener"><img class="photo r34" src="${up}assets/images/press/press-01.jpg" alt="${T('Live con luce blu', 'Live under a blue light')}" loading="lazy"></a>
+      <a href="${up}assets/images/press/press-02.jpg" target="_blank" rel="noopener"><img class="photo r34" src="${up}assets/images/press/press-02.jpg" alt="${T('Busking tra i passanti', 'Busking among the passers-by')}" loading="lazy"></a>
     </div>
     <div class="actions"><a class="btn" href="#" aria-disabled="true" title="${soon}">${T('Scarica tutte (.zip)', 'Download all (.zip)')} &darr;</a></div>
   </div>
@@ -747,7 +748,7 @@ ${zig('rust')}
 </section>
 
 <div class="band-rust center">
-  <div class="wrap"><p class="big">${T('Non è solo un concerto: è un invito a fermarsi e ascoltare.', 'Not just a show: an invitation to stop and listen.')}</p></div>
+  <div class="wrap"><p class="big">${T('Non è solo un concerto: è un\'esperienza completa per dare valore all\'ascolto.', 'Not just a show: a complete experience that gives value to listening.')}</p></div>
 </div>
 
 </main>
