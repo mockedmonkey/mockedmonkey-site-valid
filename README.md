@@ -1,4 +1,4 @@
-# Mocked Monkey — sito web
+# Mocked Monkey - sito web
 
 Sito statico multi-pagina (HTML/CSS/JS puro, nessuna build necessaria), ospitato su GitHub Pages.
 
@@ -52,10 +52,6 @@ Le date passate spariscono da sole dalla pagina Shows (ordinamento e filtro auto
 ### Foto
 
 Le immagini nel sito sono già collegate ai percorsi giusti in `assets/images/` (copertina Marasma, ritratto, gallery, foto stampa). Finché il file reale non è presente, il sito mostra automaticamente un riquadro placeholder al posto della foto rotta, così non si vede mai un'icona di errore.
-
-## Canale fan (WhatsApp Broadcast)
-
-Su ogni pagina c'è una fascia "Join the fan channel" con un bottone "Coming soon" disattivato. Quando il canale è pronto, basta chiedere a Claude di collegare il link: lo aggiorna su tutte le pagine in un colpo solo.
 
 ## Dominio personalizzato (mockedmonkey.com)
 

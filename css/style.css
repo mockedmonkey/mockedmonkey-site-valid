@@ -276,20 +276,6 @@ section.tight{ padding:56px 0; }
 .quote-source{ font-family:var(--mono); font-size:.8rem; color:var(--paper-dim); }
 
 /* ---------- fan band (direct channel signup, IDLES-style) ---------- */
-.fan-band{
-  background:var(--noise);
-  color:var(--paper);
-  padding:56px 0;
-}
-.fan-band .wrap{
-  display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;
-}
-.fan-band h2{ font-size:clamp(1.8rem,4.5vw,2.6rem); margin-bottom:.2em; }
-.fan-band p{ color:var(--paper); opacity:.9; max-width:48ch; }
-.fan-band .btn{ border-color:var(--paper); color:var(--paper); flex-shrink:0; }
-.fan-band .btn:hover{ background:var(--paper); color:var(--noise); }
-.fan-band .btn.placeholder{ opacity:.55; cursor:default; }
-.fan-band .btn.placeholder:hover{ background:transparent; color:var(--paper); }
 
 /* ---------- shows list ---------- */
 .shows-list{ list-style:none; }
