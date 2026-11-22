@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Live | Mocked Monkey, date e storico dei palchi</title>
+<meta name="description" content="Prossime date di Mocked Monkey, contest e riprese, più lo storico dei palchi: dalla strada ai festival.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Mocked Monkey">
+<meta property="og:title" content="Live | Mocked Monkey, date e storico dei palchi">
+<meta property="og:description" content="Prossime date di Mocked Monkey, contest e riprese, più lo storico dei palchi: dalla strada ai festival.">
+<meta property="og:locale" content="it_IT">
+<meta property="og:image" content="https://mockedmonkey.com/assets/images/share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#14130F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body data-events="assets/data/events.json">
+<a class="skip" href="#main">Vai al contenuto</a>
+<div class="top">
+  <div class="datebar" hidden><a href="live#prossimi"><span class="lbl">Prossima data</span><span class="when"></span><span class="what"></span></a></div>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="./" class="brand" aria-label="Mocked Monkey, home">Mocked <span>Monkey</span></a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" aria-label="Apri il menu"><span></span></button>
+      <nav class="main-nav" id="main-nav" aria-label="Principale">
+        <ul>
+          <li><a href="live" aria-current="page">Live</a></li>
+          <li><a href="musica">Musica</a></li>
+          <li><a href="listening-is-loving">Listening is loving</a></li>
+          <li><a href="booking-press">Booking & Press</a></li>
+          <li class="lang" aria-label="Lingua"><span class="on">IT</span><span class="sep">/</span><a href="en/live" hreflang="en" lang="en" data-lang-switch="en">EN</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</div>
+<main id="main">
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Live</span>
+      <h1>Dalla strada al palco</h1>
+      <p class="lead">Un uomo solo, mani e piedi al lavoro: chitarra e armonica in alto, il ritmo battuto sulla pedana in basso. Ogni live racconta una storia dall'inizio alla fine, anche quando c'è tempo solo per due brani. E tra un brano e l'altro, qualcosa succede sempre.</p>
+      <div class="actions">
+        <a class="btn" href="#prossimi">Prossimi appuntamenti &darr;</a>
+        <a class="btn" href="#storico">Dove ha già suonato &darr;</a>
+      </div>
+    </div>
+    <img class="photo r43" src="assets/images/gallery/03.jpg" alt="Mocked Monkey dal vivo con la chitarra, sotto luci verdi e viola">
+  </div>
+</section>
+
+<div class="zigzag rust" aria-hidden="true"><svg viewBox="0 0 1200 36" preserveAspectRatio="none"><polyline points="0,18 40,4 80,32 120,6 160,30 200,8 240,28 280,10 320,26 360,12 400,24 440,14 480,22 520,16 560,20 600,18 640,22 680,14 720,26 760,10 800,28 840,8 880,30 920,6 960,32 1000,4 1040,30 1080,8 1120,28 1160,10 1200,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+
+<section id="prossimi">
+  <div class="wrap">
+    <span class="eyebrow">Prossimi appuntamenti</span>
+    <h2>In calendario</h2>
+    <p class="lead">Non solo concerti: anche i giorni in studio, i contest e le riprese. Il diario di quello che si muove.</p>
+    <div class="filters" role="group" aria-label="Filtra per tipo" style="margin-top:28px">
+      <button type="button" data-filter="all" aria-pressed="true">Tutto</button>
+      <button type="button" data-filter="live" aria-pressed="false">Live</button>
+      <button type="button" data-filter="contest" aria-pressed="false">Contest</button>
+      <button type="button" data-filter="studio" aria-pressed="false">In studio</button>
+      <button type="button" data-filter="video" aria-pressed="false">Video</button>
+    </div>
+    <ul class="events" id="calendar" aria-live="polite"></ul>
+  </div>
+</section>
+
+<div class="zigzag sage" aria-hidden="true"><svg viewBox="0 0 1200 36" preserveAspectRatio="none"><polyline points="0,18 40,4 80,32 120,6 160,30 200,8 240,28 280,10 320,26 360,12 400,24 440,14 480,22 520,16 560,20 600,18 640,22 680,14 720,26 760,10 800,28 840,8 880,30 920,6 960,32 1000,4 1040,30 1080,8 1120,28 1160,10 1200,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+
+<section class="alt" id="storico">
+  <div class="wrap">
+    <span class="eyebrow">Storico dei palchi</span>
+    <h2>Dove è già passato</h2>
+    <ul class="past" id="past-list"></ul>
+  </div>
+</section>
+
+<div class="zigzag rust" aria-hidden="true"><svg viewBox="0 0 1200 36" preserveAspectRatio="none"><polyline points="0,18 40,4 80,32 120,6 160,30 200,8 240,28 280,10 320,26 360,12 400,24 440,14 480,22 520,16 560,20 600,18 640,22 680,14 720,26 760,10 800,28 840,8 880,30 920,6 960,32 1000,4 1040,30 1080,8 1120,28 1160,10 1200,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+
+<section>
+  <div class="wrap">
+    <span class="eyebrow">Foto e video</span>
+    <h2>Strada e palco</h2>
+    <div class="grid-3" style="margin-top:30px">
+      <img class="photo r43" src="assets/images/gallery/01.jpg" alt="Mocked Monkey suona per strada tra i passanti" loading="lazy">
+      <img class="photo r43" src="assets/images/press/press-01.jpg" alt="Mocked Monkey dal vivo sotto una luce blu" loading="lazy">
+      <img class="photo r43" src="assets/images/press/press-03.jpg" alt="Sul palco con chitarra e porta-armonica" loading="lazy">
+    </div>
+    <div class="actions"><a class="btn" href="https://www.youtube.com/@mockedmonkey" target="_blank" rel="noopener">Tutti i video su YouTube &rarr;</a></div>
+  </div>
+</section>
+
+<div class="band-rust center">
+  <div class="wrap">
+    <h2 class="big">Vuoi Mocked Monkey sul tuo palco?</h2>
+    <p style="margin:20px auto 0; max-width:56ch">Dal contest alla serata intera: il set si adatta alla tua programmazione e al tuo palco, anche il più piccolo.</p>
+    <div class="actions" style="justify-content:center"><a class="btn" style="border-color:var(--bg);color:var(--bg)" href="booking-press">Booking &amp; Press &rarr;</a></div>
+  </div>
+</div>
+
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <p class="footer-tag">#listeningisloving</p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/mocked.monkey/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.youtube.com/@mockedmonkey" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://open.spotify.com/artist/09dAeA3OPza0biB1lYnrai" target="_blank" rel="noopener">Spotify</a>
+        <a href="mailto:mockedmonkey@proton.me">mockedmonkey@proton.me</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Mocked Monkey, Alessandro Falchi · Bologna, Italy</div>
+  </div>
+</footer>
+<button class="to-top" type="button" aria-label="Torna su">&uarr;</button>
+<script src="js/main.js"></script>
+</body>
+</html>

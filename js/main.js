@@ -1,151 +1,203 @@
-// Mobile nav toggle
-document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.querySelector('.nav-toggle');
-  const nav = document.querySelector('.main-nav');
-  if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      toggle.setAttribute('aria-expanded', open);
-    });
+(function () {
+  'use strict';
+
+  var LANG = document.documentElement.lang === 'en' ? 'en' : 'it';
+  var TYPES = {
+    live:    { it: 'Live',      en: 'Live' },
+    contest: { it: 'Contest',   en: 'Contest' },
+    studio:  { it: 'In studio', en: 'Studio' },
+    video:   { it: 'Video',     en: 'Video' },
+    open:    { it: 'Open mic',  en: 'Open mic' },
+    festival:{ it: 'Festival',  en: 'Festival' },
+    select:  { it: 'Selezione', en: 'Selection' },
+    session: { it: 'Session',   en: 'Session' },
+    busking: { it: 'Busking',   en: 'Busking' }
+  };
+  var STR = {
+    info: { it: 'Info', en: 'Info' },
+    map: { it: 'Apri in Google Maps', en: 'Open in Google Maps' },
+    empty: { it: 'Nessun appuntamento di questo tipo, per ora. Segui Instagram per le prossime date.', en: 'Nothing of this kind on the calendar yet. Follow Instagram for the next dates.' },
+    sending: { it: 'Invio in corso...', en: 'Sending...' },
+    sent: { it: 'Messaggio inviato. Grazie, ti risponde Alessandro.', en: 'Message sent. Thanks, Alessandro will answer.' },
+    fail: { it: 'Qualcosa non ha funzionato. Riprova o scrivi a mockedmonkey@proton.me.', en: 'Something went wrong. Please try again or email mockedmonkey@proton.me.' },
+    net: { it: 'Errore di rete. Riprova o scrivi a mockedmonkey@proton.me.', en: 'Network error. Please try again or email mockedmonkey@proton.me.' }
+  };
+  function tr(v) { return (v && typeof v === 'object') ? (v[LANG] || v.it || v.en || '') : (v || ''); }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function todayISO() {
+    var d = new Date();
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
   }
+  function dayOf(ev) { return String(ev.date).slice(0, 10); }
+  function isFuture(ev, today) { return (ev.expires || dayOf(ev)) >= today; }
 
-  // Inject the waveform divider into every .waveform placeholder.
-  // Path goes from jagged/noisy (left) to a calm even line (right):
-  // the record's arc from chaos into listening.
-  const wf = `
-  <svg viewBox="0 0 1200 34" preserveAspectRatio="none" aria-hidden="true">
-    <polyline points="0,17 15,4 30,29 45,9 60,25 75,2 90,31 105,12 120,22 135,6 150,27 165,15 180,4 195,29 210,10 225,24 240,17 255,17 270,13 285,21 300,17 320,17 340,15 360,19 380,17 400,17 420,16 440,18 460,17 480,17 500,17 520,17 540,17 560,17 580,17 600,17 650,17 700,17 750,17 800,17 850,17 900,17 950,17 1000,17 1050,17 1100,17 1150,17 1200,17"
-      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>`;
-  document.querySelectorAll('img.cover-art').forEach(img => {
-    img.addEventListener('error', () => {
-      img.classList.add('img-missing');
-      img.alt = img.alt + ' (not uploaded yet)';
-    }, { once: true });
-  });
-
-  document.querySelectorAll('.waveform').forEach(el => {
-    el.innerHTML = wf;
-    el.style.color = el.dataset.color === 'noise' ? 'var(--noise)' : 'var(--listen)';
-  });
-
-  // Contact form: Web3Forms, submitted via fetch so the person
-  // gets an inline confirmation instead of leaving the page.
-  const contactForm = document.getElementById('contact-form');
-  if (contactForm) {
-    const status = document.getElementById('form-status');
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const submitBtn = contactForm.querySelector('button[type="submit"]');
-      submitBtn.disabled = true;
-      status.textContent = 'Sending...';
-      try {
-        const res = await fetch(contactForm.action, {
-          method: 'POST',
-          headers: { 'Accept': 'application/json' },
-          body: new FormData(contactForm)
-        });
-        const data = await res.json();
-        if (data.success) {
-          status.textContent = 'Message sent. Thanks, you will hear back soon.';
-          contactForm.reset();
-        } else {
-          status.textContent = 'Something went wrong. Please try again or email mockedmonkey@proton.me directly.';
-        }
-      } catch (err) {
-        status.textContent = 'Network error. Please try again or email mockedmonkey@proton.me directly.';
-      } finally {
-        submitBtn.disabled = false;
-      }
-    });
-  }
-
-  // Shows page: load dates from assets/data/shows.json.
-  // Editing that JSON file is all that's needed to add/remove a show.
-  const showsList = document.getElementById('shows-list');
-  const showsEmpty = document.getElementById('shows-empty');
-  if (showsList && showsEmpty) {
-    fetch('assets/data/shows.json')
-      .then(r => r.ok ? r.json() : { shows: [] })
-      .then(data => {
-        const today = new Date().toISOString().slice(0, 10);
-        const upcoming = (data.shows || [])
-          .filter(s => s.date >= today)
-          .sort((a, b) => a.date.localeCompare(b.date));
-
-        if (upcoming.length === 0) {
-          showsEmpty.style.display = '';
-          showsList.style.display = 'none';
-          return;
-        }
-
-        showsList.innerHTML = upcoming.map(s => {
-          const mapQuery = encodeURIComponent(s.city || s.venue || '');
-          const mapUrl = s.mapUrl || `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
-          return `
-          <li class="show-item">
-            <span class="date">${s.displayDate || s.date}</span>
-            <span class="place">${s.venue || ''}${s.venue && s.city ? ', ' : ''}${s.city || ''}
-              <small>
-                ${s.link ? `<a href="${s.link}" target="_blank" rel="noopener">${s.linkLabel || 'Details'}</a> &middot; ` : ''}<a href="${mapUrl}" target="_blank" rel="noopener" class="map-pin" aria-label="Open in Google Maps" title="Open in Google Maps">📍</a>
-              </small>
-            </span>
-          </li>`;
-        }).join('');
-        showsList.style.display = '';
-        showsEmpty.style.display = 'none';
-
-        // Build MusicEvent structured data straight from the same data
-        // that drives the visible list above, so the two can never drift
-        // out of sync the way a hand-written copy would.
-        const COUNTRY_CODES = { 'italy': 'IT', 'italia': 'IT' };
-        function parseAddress(cityField) {
-          // The trailing country is optional on the page (it is implied),
-          // so strip it if present and default the structured data to IT.
-          const parts = (cityField || '').split(',').map(p => p.trim()).filter(Boolean);
-          const address = { '@type': 'PostalAddress', addressCountry: 'IT' };
-          if (parts.length && COUNTRY_CODES[parts[parts.length - 1].toLowerCase()]) {
-            address.addressCountry = COUNTRY_CODES[parts.pop().toLowerCase()];
-          }
-          if (parts.length >= 2) {
-            address.streetAddress = parts[0];
-            address.addressLocality = parts[1];
-          } else if (parts.length === 1) {
-            address.addressLocality = parts[0];
-          }
-          return address;
-        }
-
-        const eventImage = 'https://mockedmonkey.com/assets/images/marasma-cover.jpg';
-        const graph = upcoming.map(s => ({
-          '@type': 'MusicEvent',
-          name: /mocked monkey/i.test(s.venue || '') ? s.venue : `Mocked Monkey at ${s.venue || 'live'}`,
-          startDate: s.date,
-          endDate: s.date,
-          eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
-          eventStatus: 'https://schema.org/EventScheduled',
-          description: `Mocked Monkey live at ${s.venue || ''}${s.venue && s.city ? ', ' : ''}${s.city || ''}.`,
-          image: eventImage,
-          location: {
-            '@type': 'Place',
-            name: s.venue || '',
-            address: parseAddress(s.city)
-          },
-          organizer: { '@type': 'Organization', name: s.venue || 'Mocked Monkey' },
-          performer: { '@type': 'MusicGroup', name: 'Mocked Monkey', url: 'https://mockedmonkey.com/' },
-          url: 'https://mockedmonkey.com/shows'
-        }));
-
-        const ld = document.createElement('script');
-        ld.type = 'application/ld+json';
-        ld.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
-        document.head.appendChild(ld);
-      })
-      .catch(() => {
-        // JSON missing or malformed: fall back to the empty state
-        // rather than showing a broken page.
-        showsEmpty.style.display = '';
-        showsList.style.display = 'none';
+  document.addEventListener('DOMContentLoaded', function () {
+    // Remember the chosen language.
+    try {
+      localStorage.setItem('mm-lang', LANG);
+    } catch (e) {}
+    document.querySelectorAll('a[data-lang-switch]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        try { localStorage.setItem('mm-lang', a.getAttribute('data-lang-switch')); } catch (e) {}
       });
-  }
-});
+    });
+    // Mobile menu
+    var toggle = document.querySelector('.nav-toggle');
+    var nav = document.querySelector('.main-nav');
+    if (toggle && nav) {
+      toggle.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+    }
+
+    // Back to top
+    var top = document.querySelector('.to-top');
+    if (top) {
+      var onScroll = function () { top.classList.toggle('show', window.scrollY > 500); };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+      top.addEventListener('click', function () { window.scrollTo({ top: 0 }); });
+    }
+
+    // YouTube: load the player only on click
+    document.querySelectorAll('.yt[data-yt]').forEach(function (box) {
+      var id = box.getAttribute('data-yt');
+      var btn = box.querySelector('button');
+      if (!btn) return;
+      btn.style.backgroundImage = 'url(https://i.ytimg.com/vi/' + id + '/hqdefault.jpg)';
+      btn.addEventListener('click', function () {
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+        f.title = box.getAttribute('data-title') || 'Video';
+        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        f.setAttribute('allowfullscreen', '');
+        box.innerHTML = '';
+        box.appendChild(f);
+      });
+    });
+
+    // Calendar data: next-date bar, home teaser, live calendar, past shows
+    var jsonUrl = document.body.getAttribute('data-events');
+    if (jsonUrl) {
+      fetch(jsonUrl).then(function (r) { return r.ok ? r.json() : { events: [], past: [] }; }).then(function (data) {
+        var today = todayISO();
+        var all = (data.events || []).slice().sort(function (a, b) { return String(a.date).localeCompare(String(b.date)); });
+        var upcoming = all.filter(function (e) { return isFuture(e, today); });
+
+        // 1. Next-date bar
+        var bar = document.querySelector('.datebar');
+        if (bar) {
+          var next = upcoming.filter(function (e) { return e.bar !== false; })[0];
+          if (next) {
+            bar.querySelector('.when').textContent = next.displayDate;
+            bar.querySelector('.what').textContent = tr(next.title) + ' →';
+            bar.hidden = false;
+          } else {
+            bar.hidden = true;
+          }
+        }
+
+        function row(e) {
+          var mapQ = encodeURIComponent(tr(e.title));
+          var map = e.mapUrl || ('https://www.google.com/maps/search/?api=1&query=' + mapQ);
+          var links = '';
+          if (e.link) links += '<a href="' + esc(e.link) + '" target="_blank" rel="noopener">' + esc(tr(e.linkLabel) || STR.info[LANG]) + ' →</a>';
+          if (e.venue) links += '<a class="map" href="' + esc(map) + '" target="_blank" rel="noopener" aria-label="' + STR.map[LANG] + '" title="' + STR.map[LANG] + '">📍</a>';
+          return '<li class="event" data-type="' + esc(e.type) + '">' +
+            '<span class="date">' + esc(e.displayDate) + '</span>' +
+            '<span class="type">' + esc(tr(TYPES[e.type])) + '</span>' +
+            '<span class="title">' + esc(tr(e.title)) + '<span class="note">' + esc(tr(e.note)) + '</span></span>' +
+            '<span class="links">' + links + '</span></li>';
+        }
+
+        // 2. Home: first three
+        var home = document.getElementById('home-events');
+        if (home) {
+          home.innerHTML = upcoming.slice(0, 3).map(row).join('') || '<li class="events-empty">' + STR.empty[LANG] + '</li>';
+        }
+
+        // 3. Live page calendar + filter
+        var cal = document.getElementById('calendar');
+        if (cal) {
+          var render = function (filter) {
+            var list = upcoming.filter(function (e) { return filter === 'all' || e.type === filter; });
+            cal.innerHTML = list.map(row).join('') || '<li class="events-empty">' + STR.empty[LANG] + '</li>';
+          };
+          render('all');
+          document.querySelectorAll('.filters button').forEach(function (b) {
+            b.addEventListener('click', function () {
+              document.querySelectorAll('.filters button').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+              b.setAttribute('aria-pressed', 'true');
+              render(b.getAttribute('data-filter'));
+            });
+          });
+
+          // Structured data for real, dated events
+          var graph = upcoming.filter(function (e) { return e.venue && /^\d{4}-\d{2}-\d{2}$/.test(e.date); }).map(function (e) {
+            return {
+              '@type': 'MusicEvent',
+              name: tr(e.title) + ', Mocked Monkey',
+              startDate: e.date,
+              eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+              eventStatus: 'https://schema.org/EventScheduled',
+              location: { '@type': 'Place', name: e.venue, address: { '@type': 'PostalAddress', addressLocality: e.locality, addressCountry: 'IT' } },
+              performer: { '@type': 'MusicGroup', name: 'Mocked Monkey' }
+            };
+          });
+          if (graph.length) {
+            var ld = document.createElement('script');
+            ld.type = 'application/ld+json';
+            ld.textContent = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+            document.head.appendChild(ld);
+          }
+        }
+
+        // 4. Past shows (history), including events whose date has passed
+        var pastEl = document.getElementById('past-list');
+        if (pastEl) {
+          var moved = all.filter(function (e) { return !isFuture(e, today) && (e.type === 'live' || e.type === 'contest'); })
+            .reverse().map(function (e) {
+              var p = e.date.slice(5, 7) + '.' + e.date.slice(0, 4);
+              return { when: p, type: e.type, place: e.title, note: e.note };
+            });
+          var past = moved.concat(data.past || []);
+          if (pastEl) {
+            pastEl.innerHTML = past.map(function (p) {
+              var city = tr(p.city);
+              var note = tr(p.note);
+              return '<li><span class="when">' + esc(p.when) + '</span><span class="kind">' + esc(tr(TYPES[p.type])) + '</span>' +
+                '<span class="where">' + esc(tr(p.place)) + (city ? ' <small>' + esc(city) + '</small>' : '') + (note ? '<em>' + esc(note) + '</em>' : '') + '</span></li>';
+            }).join('');
+          }
+        }
+      }).catch(function () {
+        var bar = document.querySelector('.datebar');
+        if (bar) bar.hidden = true;
+      });
+    }
+
+    // Contact form (Web3Forms)
+    var form = document.getElementById('contact-form');
+    if (form) {
+      var status = document.getElementById('form-status');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type="submit"]');
+        var kind = form.querySelector('[name="request_type"]');
+        var data = new FormData(form);
+        data.set('subject', '[' + (kind ? kind.value : 'Contatto') + '] mockedmonkey.com');
+        btn.disabled = true;
+        status.textContent = STR.sending[LANG];
+        fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: data })
+          .then(function (r) { return r.json(); })
+          .then(function (j) {
+            if (j.success) { status.textContent = STR.sent[LANG]; form.reset(); }
+            else { status.textContent = STR.fail[LANG]; }
+          })
+          .catch(function () { status.textContent = STR.net[LANG]; })
+          .then(function () { btn.disabled = false; });
+      });
+    }
+  });
+})();
