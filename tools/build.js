@@ -169,7 +169,21 @@ ${ORDER.map(k => `          <li><a href="${href(k)}"${page === k ? ' aria-curren
 </html>
 `;
 
-  const quote = () => `<blockquote class="pin tilt-l" style="margin:0">
+  const ICO = {
+    ig: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>',
+    yt: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="4"/><path d="M10 9l6 3-6 3z" fill="currentColor" stroke="none"/></svg>',
+    sp: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7 9.5c3.5-1 7-1 10 .7M7.5 13c3-.8 6-.8 8.5.5M8 16.3c2.3-.6 4.7-.6 6.7.5"/></svg>'
+  };
+  const follow = (cls) => `<div class="follow ${cls || ''}">
+  <span class="eyebrow">Follow me</span>
+  <div class="actions">
+    <a class="btn sm" href="${L.ig}" ${ext}>${ICO.ig}Instagram</a>
+    <a class="btn sm" href="${L.yt}" ${ext}>${ICO.yt}YouTube</a>
+    <a class="btn sm" href="${L.spArtist}" ${ext}>${ICO.sp}Spotify</a>
+  </div>
+</div>`;
+
+  const quote = () => `<blockquote class="pin compact tilt-l" style="margin:0">
   <p class="pull">${T('«Va in una direzione opposta a quella del mercato, ma funziona alla grande. Il live è un punto di forza ancora più grande.»', '"It goes the opposite way to the market, and it works brilliantly. The live show is an even bigger strength."')}</p>
   <p class="pull-by">${T('Feedback da SONDA · Centro Musica Modena, 2026', 'Feedback from SONDA · Centro Musica Modena, 2026')}</p>
 </blockquote>`;
@@ -185,12 +199,14 @@ ${ORDER.map(k => `          <li><a href="${href(k)}"${page === k ? ' aria-curren
   <div class="wrap hero-grid">
     <div>
       <span class="eyebrow">${T('Bologna, Italia · One man band', 'Bologna, Italy · One man band')}</span>
-      <h1>${T('Quando si è troppo poveri per avere una band, una Wii diventa la cassa. Un kazoo diventa un synth.', 'When you\'re too poor to have a band, a Wii becomes the kick drum. A kazoo becomes a synth.')}</h1>
+      <h1>${T('Una Wii diventa la cassa. Un kazoo diventa un synth.', 'A Wii becomes the kick drum. A kazoo becomes a synth.')}</h1>
+      <p class="sub">${T('Quando si è troppo poveri per avere una band', 'When you\'re too poor to have a band')}</p>
       <p class="lead">${T('Mocked Monkey è Alessandro Falchi. Costruisce gli strumenti che sul mercato non esistono, per trovare un suono che emozioni. Sul palco è da solo, ma sembra una band.', 'Mocked Monkey is Alessandro Falchi. He builds the instruments no shop sells, chasing a sound that actually moves you. He\'s alone on stage, but it sounds like a band.')}</p>
       <div class="actions">
         <a class="btn" href="${L.yt}" ${ext}>&#9654; ${T('Guarda il live', 'Watch him live')}</a>
         <a class="btn" href="${hrefTo('live', '#prossimi')}">${T('Prossime date', 'Upcoming dates')} &rarr;</a>
       </div>
+      ${follow()}
     </div>
     <div class="hero-media">${ph(archive(117), T('Video live a Spazio Astra, 30 secondi, in loop e senza audio', 'Live video at Spazio Astra, 30 seconds, looping and muted'), 'r34')}</div>
   </div>
@@ -263,8 +279,8 @@ ${zig('rust')}
 <div class="band-rust">
   <div class="wrap">
     <p class="big">${T('Ascoltare è un atto d\'amore. Verso gli altri, e verso sé stessi.', 'Listening is an act of love. Towards others, and towards yourself.')}</p>
-    <p style="margin:24px 0 0; max-width:56ch">${T('Tutto è cominciato suonando per strada. Da lì viene l\'idea che tiene insieme canzoni, strumenti e concerti.', 'It all started busking. That\'s where the idea holding songs, instruments and shows together comes from.')}</p>
-    <div class="actions"><a class="btn" style="border-color:var(--bg);color:var(--bg)" href="${hrefTo('listening')}">${T('Leggi il manifesto', 'Read the manifesto')} &rarr;</a></div>
+    <p style="margin:24px auto 0; max-width:56ch">${T('Tutto è cominciato suonando per strada. Da lì viene l\'idea che tiene insieme canzoni, strumenti e concerti.', 'It all started busking. That\'s where the idea holding songs, instruments and shows together comes from.')}</p>
+    <div class="actions"><a class="btn" href="${hrefTo('listening')}">${T('Leggi il manifesto', 'Read the manifesto')} &rarr;</a></div>
   </div>
 </div>
 
@@ -297,6 +313,7 @@ ${zig('rust')}
         <a class="btn" href="#prossimi">${T('Prossimi appuntamenti', 'Coming up')} &darr;</a>
         <a class="btn" href="#storico">${T('Dove ha già suonato', 'Where he\'s played')} &darr;</a>
       </div>
+      ${follow()}
     </div>
     <img class="photo r43" src="${up}assets/images/gallery/03.jpg" alt="${T('Mocked Monkey dal vivo con la chitarra, sotto luci verdi e viola', 'Mocked Monkey live with the guitar under green and purple lights')}">
   </div>
@@ -322,16 +339,6 @@ ${zig('rust')}
 
 ${zig('sage')}
 
-<section class="alt" id="storico">
-  <div class="wrap">
-    <span class="eyebrow">${T('Storico dei palchi', 'Past shows')}</span>
-    <h2>${T('Dove è già passato', 'Where he\'s played')}</h2>
-    <ul class="past" id="past-list"></ul>
-  </div>
-</section>
-
-${zig('rust')}
-
 <section>
   <div class="wrap">
     <span class="eyebrow">${T('Foto e video', 'Photos & video')}</span>
@@ -345,11 +352,21 @@ ${zig('rust')}
   </div>
 </section>
 
+${zig('rust')}
+
+<section class="alt" id="storico">
+  <div class="wrap">
+    <span class="eyebrow">${T('Storico dei palchi', 'Past shows')}</span>
+    <h2>${T('Dove è già passato', 'Where he\'s played')}</h2>
+    <ul class="past" id="past-list"></ul>
+  </div>
+</section>
+
 <div class="band-rust center">
   <div class="wrap">
-    <h2 class="big">${T('Vuoi Mocked Monkey sul tuo palco?', 'Want Mocked Monkey on your stage?')}</h2>
+    <h2 class="big one-line">${T('Vuoi Mocked Monkey sul tuo palco?', 'Want Mocked Monkey on your stage?')}</h2>
     <p style="margin:20px auto 0; max-width:56ch">${T('Dal contest alla serata intera: il set si adatta alla tua programmazione e al tuo palco, anche il più piccolo.', 'From a contest slot to a full evening: the set fits your line-up and your stage, even the smallest one.')}</p>
-    <div class="actions" style="justify-content:center"><a class="btn" style="border-color:var(--bg);color:var(--bg)" href="${hrefTo('booking')}">Booking &amp; Press &rarr;</a></div>
+    <div class="actions" style="justify-content:center"><a class="btn" href="${hrefTo('booking')}">Booking &amp; Press &rarr;</a></div>
   </div>
 </div>
 
@@ -361,25 +378,29 @@ ${zig('rust')}
   pages.music = () => `<main id="main">
 
 <section class="hero">
-  <div class="wrap grid-2">
+  <div class="wrap hero-grid music-hero">
     <div>
       <span class="eyebrow">${T('Musica', 'Music')}</span>
       <h1>${T('Ascolta, guarda, gioca', 'Listen, watch, play')}</h1>
       <p class="lead">${T('Un nuovo singolo in lavorazione, un concept album e un gioco costruito su una canzone. Tre modi per entrare nello stesso mondo.', 'A new single in the making, a concept album and a game built around a song. Three ways into the same world.')}</p>
-      <nav class="index3" aria-label="${T('In questa pagina', 'On this page')}" style="grid-template-columns:1fr">
-        <a href="#singolo"><small>${T('Singolo · In lavorazione', 'Single · In the making')}</small><span>${T('Il nuovo brano', 'The new song')}</span></a>
-        <a href="#gioco"><small>${T('Gioco · Gratis', 'Game · Free')}</small><span>Immovable: the game</span></a>
-        <a href="#marasma"><small>${T('Album · 2025', 'Album · 2025')}</small><span>Marasma</span></a>
+      <nav class="index-list" aria-label="${T('In questa pagina', 'On this page')}">
+        <a href="#singolo"><span>${T('Il nuovo brano', 'The new song')}</span><small>${T('Singolo · In lavorazione', 'Single · In the making')}</small></a>
+        <a href="#gioco"><span>Immovable: the game</span><small>${T('Gioco · Gratis', 'Game · Free')}</small></a>
+        <a href="#marasma"><span>Marasma</span><small>${T('Album · 2025', 'Album · 2025')}</small></a>
+        <a href="#video"><span>${T('Guarda i video', 'Watch the videos')}</span><small>${T('Video · YouTube', 'Video · YouTube')}</small></a>
       </nav>
     </div>
-    <img class="photo r43" src="${up}assets/images/press/press-03.jpg" alt="${T('Sul palco con chitarra e porta-armonica', 'On stage with guitar and harmonica holder')}">
+    <div class="hero-side">
+      <div class="fill"><img src="${up}assets/images/press/press-03.jpg" alt="${T('Sul palco con chitarra e porta-armonica', 'On stage with guitar and harmonica holder')}"></div>
+      ${follow()}
+    </div>
   </div>
 </section>
 
 ${zig('rust')}
 
 <section id="singolo">
-  <div class="wrap grid-2">
+  <div class="wrap grid-2 flip">
     <div>
       <span class="eyebrow">${T('Nuovo singolo · In lavorazione', 'New single · In the making')}</span>
       <h2>${T('Un vecchio oggetto sta per riaccendersi', 'An old object is about to switch back on')}</h2>
@@ -419,7 +440,7 @@ ${zig('rust')}
 
 <section id="marasma">
   <div class="wrap">
-    <div class="grid-2" style="align-items:start">
+    <div class="grid-2 flip" style="align-items:start">
       <div>
         <span class="eyebrow">${T('Concept album, 2025', 'Concept album, 2025')}</span>
         <h2>Marasma</h2>
@@ -474,7 +495,7 @@ ${zig('sage')}
 <div class="band-rust center">
   <div class="wrap">
     <p class="big">${T('Ogni canzone nasce da un gesto semplice: fermarsi ad ascoltare.', 'Every song starts from a simple gesture: stopping to listen.')}</p>
-    <div class="actions" style="justify-content:center"><a class="btn" style="border-color:var(--bg);color:var(--bg)" href="${hrefTo('listening')}">${T('Leggi il manifesto', 'Read the manifesto')} &rarr;</a></div>
+    <div class="actions" style="justify-content:center"><a class="btn" href="${hrefTo('listening')}">${T('Leggi il manifesto', 'Read the manifesto')} &rarr;</a></div>
   </div>
 </div>
 
@@ -487,13 +508,13 @@ ${zig('sage')}
   pages.listening = () => `<main id="main">
 
 <section class="hero" style="padding-bottom:56px">
-  <div class="wrap">
+  <div class="wrap" style="text-align:center">
     <span class="eyebrow">#listeningisloving · ${T('Il manifesto', 'The manifesto')}</span>
   </div>
 </section>
 <div class="band-rust" style="margin-top:-56px">
   <div class="wrap">
-    <h1 class="big" style="font-size:clamp(2rem,5vw,3.8rem); max-width:24ch">${T('In un mondo pieno di rumore, scegliere di ascoltare è un atto d\'amore.', 'In a world full of noise, choosing to listen is an act of love.')}</h1>
+    <h1 class="big" style="font-size:clamp(2rem,5vw,3.8rem)">${T('In un mondo pieno di rumore, scegliere di ascoltare è un atto d\'amore.', 'In a world full of noise, choosing to listen is an act of love.')}</h1>
   </div>
 </div>
 
@@ -501,9 +522,9 @@ ${zig('sage')}
   <div class="wrap grid-2" style="align-items:start">
     <ul style="list-style:none; margin:0; padding:0; display:grid; gap:18px">
 ${T(['Chi si ferma per strada non paga un biglietto: sceglie di ascoltare.', 'Ascoltiamo gli altri. E anche noi stessi.', 'Scappare non è la soluzione. Ascoltarsi sì.', 'L\'ascolto è l\'unico modo per cambiare davvero.'],
-   ['Whoever stops on the street doesn\'t pay for a ticket: they choose to listen.', 'We listen to others. And to ourselves, too.', 'Running away is not the answer. Listening to yourself is.', 'Listening is the only way to truly change.']).map(l => `      <li class="pull" style="margin:0">${l}</li>`).join('\n')}
+   ['Whoever stops on the street doesn\'t pay for a ticket: they choose to listen.', 'We listen to others. And to ourselves, too.', 'Running away is not the answer. Listening to yourself is.', 'Listening is the only way to truly change.']).map(l => `      <li class="line-s">${l}</li>`).join('\n')}
     </ul>
-    <blockquote class="pin tilt-r" style="margin:0">
+    <blockquote class="pin compact tilt-r" style="margin:0">
       <p class="pull">${T('«Credo davvero che l\'ascolto, verso gli altri e verso sé stessi, sia un atto d\'amore. A me ha salvato.»', '"I truly believe that listening, to others and to yourself, is an act of love. It saved me."')}</p>
       <p class="pull-by">Alessandro Falchi</p>
     </blockquote>
@@ -522,7 +543,7 @@ ${zig('sage')}
       <p>${T('Sul palco è da solo, con chitarra, voce, kazoo e gli strumenti dell\'officina, qui sotto.', 'On stage he\'s alone, with guitar, voice, kazoo and the instruments from the workshop below.')}</p>
       <p>${T('Durante i live qualcosa si rompe quasi sempre: una corda, un cavo, un pezzo dell\'officina. Fa parte dello spettacolo. Le canzoni, invece, sono serie: parlano di fuga, di rumore e di quanto sia difficile ascoltarsi.', 'Something almost always breaks during a show: a string, a cable, a piece of the workshop. It\'s part of the act. The songs, on the other hand, are serious: they\'re about escape, noise, and how hard it is to listen to yourself.')}</p>
       <dl class="facts">
-        <div><dt>${T('Da', 'From')}</dt><dd>Foligno &rarr; Bologna</dd></div>
+        <div><dt>${T('Da', 'From')}</dt><dd>Foligno/Bologna</dd></div>
         <div><dt>${T('Formazione', 'Line-up')}</dt><dd>One man band</dd></div>
         <div><dt>${T('Genere', 'Genre')}</dt><dd>Indie / alt rock</dd></div>
       </dl>
@@ -744,6 +765,12 @@ ${zig('rust')}
         <p id="form-status" class="form-status" role="status"></p>
       </form>
     </div>
+  </div>
+</section>
+
+<section class="tight" id="follow">
+  <div class="wrap" style="text-align:center">
+    ${follow('center')}
   </div>
 </section>
 

@@ -317,3 +317,43 @@ input:focus, select:focus, textarea:focus{ border-color:var(--sage); outline:non
 .card .eyebrow{ margin:0; }
 .credits{ font-size:inherit; margin-top:0; }
 .photo-link{ display:block; }
+
+/* ---- round 3 ---- */
+.sub{ font-family:var(--display); text-transform:uppercase; font-size:clamp(1.3rem,2.6vw,2rem); color:var(--rust); margin:-6px 0 18px; line-height:1.1; }
+.btn.sm{ padding:10px 16px; min-height:42px; font-size:.74rem; }
+.follow{ margin-top:26px; }
+.follow .eyebrow{ margin-bottom:10px; }
+.follow .actions{ margin-top:0; gap:10px; }
+.follow.center .actions{ justify-content:center; }
+
+/* rust bands: white, centred, wide */
+.band-rust{ color:#fff; text-align:center; }
+.band-rust .eyebrow{ color:#fff; }
+.band-rust .big{ max-width:none; margin:0 auto; color:#fff; }
+.band-rust p{ margin-left:auto; margin-right:auto; }
+.band-rust .actions{ justify-content:center; }
+.band-rust .btn{ border-color:#fff; color:#fff; }
+.band-rust .btn:hover{ background:#fff; color:var(--rust); }
+@media (min-width:901px){ .band-rust .big.one-line{ white-space:nowrap; } }
+
+/* smaller quote boxes */
+.pin.compact{ padding:18px 22px; max-width:460px; }
+.pin.compact .pull{ font-size:clamp(1rem,1.5vw,1.2rem); line-height:1.2; margin-bottom:8px; }
+.pin.compact .pull-by{ font-size:.68rem; }
+.line-s{ font-family:var(--display); text-transform:uppercase; font-size:clamp(1.15rem,1.9vw,1.5rem); line-height:1.15; margin:0; }
+
+/* music hero: four equal compact rows, photo + follow on the right */
+.index-list{ display:grid; gap:10px; margin-top:30px; }
+.index-list a{ display:flex; justify-content:space-between; align-items:center; gap:16px; height:56px; padding:0 18px; border:1.5px solid var(--line); background:var(--surface); text-decoration:none; }
+.index-list a:hover{ border-color:var(--rust); }
+.index-list span{ font-family:var(--display); text-transform:uppercase; font-size:1.15rem; }
+.index-list small{ font-family:var(--mono); font-size:.66rem; letter-spacing:.12em; text-transform:uppercase; color:var(--sage); text-align:right; }
+.music-hero{ align-items:stretch; }
+.hero-side{ display:flex; flex-direction:column; min-height:0; }
+.hero-side .fill{ position:relative; flex:1; min-height:260px; }
+.hero-side .fill img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; border:1px solid var(--line-2); }
+.hero-side .follow{ margin-top:16px; }
+
+/* alternate text/image sides on desktop (DOM order stays text first for mobile) */
+@media (min-width:901px){ .grid-2.flip > :first-child{ order:2; } }
+@media (min-width:901px){ .band-rust .big.one-line{ font-size:clamp(1.6rem,3.4vw,3rem); } }
